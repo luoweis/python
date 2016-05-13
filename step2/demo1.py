@@ -42,6 +42,31 @@ def get_content(url,input_agents):
 		if hasattr(e,'reason'):
 			print e.reason
 
-content = get_content(url,agents)
-print content
+html_content = get_content(url,agents)
+#print html_content
 #将抓取的网页内容进行正则匹配
+#re.findall 是找寻所有匹配的内容
+pattern = re.compile('<div.*?author.*?">.*?<a.*?<img.*?</a>.*?<a.*?href="(.*?)".*?target.*?title="(.*?)">.*?'+
+	'.*?content">(.*?)</div>.*?',re.S)#正则表达式是关键之处
+items = re.findall(pattern,html_content)
+#print items
+prefix='http://www.qiushibaike.com'
+for item in items:
+	print item[0],item[1],item[2]
+
+'''
+测试结果：
+/users/27744140/ 看了三年才有账号 
+
+lz带五岁儿子第一次坐船，旅游观光那种，儿子趴着栏杆看大海，lz全程拽着儿子衣服后，怕出现危险!<br/><br/>儿子:“爸爸 ! 你很害怕坐船吗？ 不要这么紧张呀 !…… ”
+
+
+/users/12995077/ 清眸、、 
+
+今天是奶奶九十岁生日，从小跟着奶奶长大，不求别的，在大糗百为奶奶求个祝福，您的健康是我最大的幸福……
+
+
+/users/31583217/ 都是逼哪里来美丑 
+
+一个真正的课代表，敢于面对老师质疑的目光，勇于面对同学们希冀的眼神，愣是把30本作业说成60本！<br/>有了你学习变得轻松了许多。
+'''
