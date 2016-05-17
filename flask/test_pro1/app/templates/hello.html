@@ -1,0 +1,12 @@
+
+{% extends "base.html" %}
+
+{% block title %}用户页{% endblock %}
+
+{% block page_content %}
+{% if name %}
+		<h1>你好，{{ name }}</h1>
+	{% else %}
+		<h1>未找到</h1>
+	{% endif %}
+{% endblock %}
